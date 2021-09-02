@@ -14,9 +14,8 @@ func binarySearch(arr []int, searchValue int, start int, end int) int {
 		} else {
 			return binarySearch(arr, searchValue, midPoint+1, end)
 		}
-	} else {
-		return -1
 	}
+	return -1
 }
 
 func main() {

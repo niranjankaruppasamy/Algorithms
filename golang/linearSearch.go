@@ -10,7 +10,7 @@ func linearSearch(arr []int, searchValue int) int {
 			return index
 		}
 	}
-	return 0
+	return -1
 }
 
 func main() {
