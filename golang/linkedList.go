@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
-
+import (
+	"fmt"
+	"strconv"
+)
 
 type Node struct {
 	data int
@@ -10,44 +12,53 @@ type Node struct {
 
 type linkedList struct {
 	head *Node
-	len  int
 }
 
-func (l *linkedList) insert(val int) {
-	node := Node{}
-	node.data = val
-	if l.len == 0 {
-		l.head = &node
-		l.len++
-		return
-	}
-	ptr := l.head
-	for i := 0; i < l.len; i++ {
-		if ptr.next == nil {
-			ptr.next = &node
-			l.len++
-			return
-		}
-		ptr = ptr.next
-	}
-}
-
-func (l *linkedList) print() {
-	if l.len == 0 {
-		fmt.Println("No nodes")
+func (l *linkedList) InsertAtBeginning(val int) {
+	if l.head == nil {
+		l.head = &Node{val, nil}
 	} else {
-		current := l.head
-		for i := 0; i < l.len; i++ {
-			fmt.Println(current.data)
-			current = current.next
+		node := &Node{val, l.head}
+		l.head = node
+	}
+}
+
+func (l *linkedList) InsertAtEnd(val int) {
+	if l.head == nil {
+		l.head = &Node{val, nil}
+	} else {
+		curr := l.head
+		for {
+			if curr.next == nil {
+				curr.next = &Node{val, nil}
+				return
+			}
+			curr = curr.next
 		}
 	}
+}
+
+func (l *linkedList) Print() {
+	if l.head == nil {
+		fmt.Println("Linked list is empty")
+	}
+	node := *l.head
+	var res string = ""
+	for {
+		res = res + strconv.Itoa(node.data) + "-->"
+		if node.next == nil {
+			break
+		}
+		node = *node.next
+	}
+	fmt.Println(res)
 }
 
 func main() {
-	var ll = linkedList{nil, 0}
-	ll.insert(1)
-	ll.insert(2)
-	ll.print()
-	fmt.Println(ll.len)
+	var ll = linkedList{}
+	ll.InsertAtBeginning(30)
+	ll.InsertAtBeginning(20)
+	ll.InsertAtBeginning(10)
+	ll.InsertAtEnd(40)
+	ll.Print()
 }
