@@ -35,6 +35,42 @@ class SinglyLinkedList {
         }
     }
 
+    public int getLength() {
+        int length = 0;
+        Node node = this.head;
+        while (node != null) {
+            length += 1;
+            node = node.next;
+        }
+        return length;
+    }
+
+    public void insertAtIndex(int val, int index) {
+        int totalLength = getLength();
+        if (index > totalLength) {
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+        if (index == 0) {
+            insertAtBeginning(val);
+            return;
+        }
+        if (index == totalLength) {
+            insertAtEnd(val);
+            return;
+        }
+        int counter = 1;
+        Node node = this.head.next;
+        while (node != null) {
+            if (counter == index - 1) {
+                node.next = new Node(val, node.next);
+                break;
+            }
+            node = node.next;
+            ++counter;
+        }
+    }
+
+
     public void printList() {
         Node currentNode = this.head;
         String res = "";
@@ -49,10 +85,12 @@ class SinglyLinkedList {
 public class LinkedList {
     public static void main(String[] args) {
         SinglyLinkedList ll = new SinglyLinkedList();
-        ll.insertAtBeginning(10);
-        ll.insertAtBeginning(20);
         ll.insertAtBeginning(30);
+        ll.insertAtBeginning(20);
+        ll.insertAtBeginning(10);
         ll.insertAtEnd(40);
+        ll.insertAtIndex(50, 4);
+        ll.insertAtIndex(45, 4);
         ll.printList();
     }
 }
