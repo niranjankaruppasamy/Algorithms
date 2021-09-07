@@ -32,9 +32,24 @@ class LinkedList:
         return counter
 
     def insert_at(self, val: Any, index: int):
-        ...
+        if index == 0:
+            self.insert_at_beginning(val)
+            return
+        if index == self.get_length:
+            self.insert_at_end(val)
+            return
+        if index > self.get_length:
+            raise IndexError("Invalid index")
+        node = self.head.next
+        counter = 1
+        while node:
+            if counter == index - 1:
+                node.next = Node(val, node.next)
+                return
+            node = node.next
+            counter += 1
 
-    def print(self):
+    def printList(self):
         if self.head is None:
             print("Linked list is empty")
         node = self.head
@@ -47,9 +62,10 @@ class LinkedList:
 
 if __name__ == "__main__":
     ll = LinkedList()
-    ll.insert_at_beginning(3)
-    ll.insert_at_beginning(10)
-    ll.insert_at_end(5)
-    ll.insert_at_end(65)
-    ll.print()
-    print(ll.get_length)
+    ll.insert_at_beginning(2)
+    ll.insert_at_beginning(1)
+    ll.insert_at_end(3)
+    ll.insert_at_end(4)
+    ll.insert_at(5, 4)
+    ll.insert_at(6, 10) # raise IndexError
+    ll.printList()
