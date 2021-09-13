@@ -59,6 +59,36 @@ class LinkedList:
             node = node.next
         print(res)
 
+    def delete_from_beginning(self):
+        self.head = self.head.next
+
+    def delete_from_end(self):
+        curr = self.head
+        while curr:
+            if curr.next.next is None:
+                curr.next = None
+                break
+            curr = curr.next
+
+    def delete_at_index(self, index: int):
+        # delete node based on index
+        if index > self.get_length:
+            raise IndexError("Invalid Index")
+        if index == 0:
+            self.delete_from_beginning()
+            return
+        if index == self.get_length:
+            self.delete_from_end()
+            return
+        counter = 0
+        curr = self.head
+        while curr:
+            if counter == index - 1:
+                curr.next = curr.next.next
+                break
+            curr = curr.next
+            counter += 1
+
 
 if __name__ == "__main__":
     ll = LinkedList()
@@ -67,5 +97,9 @@ if __name__ == "__main__":
     ll.insert_at_end(3)
     ll.insert_at_end(4)
     ll.insert_at(5, 4)
-    ll.insert_at(6, 10) # raise IndexError
+    ll.delete_at_index(2) # will remove 3
+    try:
+        ll.insert_at(6, 10) # raise IndexError
+    except IndexError:
+        print("Error!")
     ll.printList()
