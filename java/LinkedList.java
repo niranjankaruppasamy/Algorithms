@@ -71,6 +71,16 @@ class SinglyLinkedList {
     }
 
 
+    public void deleteNode(int index) {
+        int counter = 0;
+        Node curr = this.head;
+        while (curr != null) {
+            curr = curr.next;
+            counter++;
+        }
+    }
+
+
     public void printList() {
         Node currentNode = this.head;
         String res = "";

@@ -89,6 +89,26 @@ class LinkedList:
             curr = curr.next
             counter += 1
 
+    def delete_by_value(self, val: Any):
+        # delete node based on the value
+        curr = self.head
+        if curr.data == val:
+            self.head = self.head.next
+            return
+        while curr:
+            if curr.next.data == val:
+                curr.next = curr.next.next
+                break
+            curr = curr.next
+
+    def insert_after(self, val_to_add: Any, value_after: Any):
+        curr = self.head
+        while curr:
+            if curr.data == value_after:
+                curr.next = Node(val_to_add, curr.next)
+                break
+            curr = curr.next
+
 
 if __name__ == "__main__":
     ll = LinkedList()
@@ -102,4 +122,7 @@ if __name__ == "__main__":
         ll.insert_at(6, 10) # raise IndexError
     except IndexError:
         print("Error!")
+    ll.delete_by_value(1)
+    ll.insert_after(3, 2)
+    # ll.insert_after(3, 2)
     ll.printList()
