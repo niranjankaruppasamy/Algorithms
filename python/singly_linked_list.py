@@ -124,5 +124,4 @@ if __name__ == "__main__":
         print("Error!")
     ll.delete_by_value(1)
     ll.insert_after(3, 2)
-    # ll.insert_after(3, 2)
     ll.printList()
