@@ -22,15 +22,51 @@ class Tree:
             else:
                 self.right = Tree(val)
 
-    def print_tree(self):
-        # pre order traversal
-        print(self.data)
-
+    def inorder(self):
+        # inorder order traversal
+        elements = list()
         if self.left:
-            self.left.print_tree()
+            elements += self.left.inorder()
+        elements.append(self.data)
         if self.right:
-            self.right.print_tree()
+            elements += self.right.inorder()
+        return elements
 
+    def preorder(self):
+        # pre order traversal
+        elements = list()
+        elements.append(self.data)
+        if self.left:
+            elements += self.left.preorder()
+        if self.right:
+            elements += self.right.preorder()
+        return elements
+
+    def postorder(self):
+        # post order traversal
+        elements = list()
+        if self.left:
+            elements += self.left.postorder()
+        if self.right:
+            elements += self.right.postorder()
+        elements.append(self.data)
+        return elements
+
+    def search(self, val: Any):
+        if self.data == val:
+            return True
+        # check left side nodes
+        if self.data > val:
+            if self.left:
+                return self.left.search(val)
+            else:
+                return False
+        # check righ side nodes
+        if self.data < val:
+            if self.right:
+                return self.right.search(val)
+            else:
+                return False
 
 if __name__ == "__main__":
     tree = Tree(50)
@@ -38,4 +74,8 @@ if __name__ == "__main__":
     tree.insert(30)
     tree.insert(40)
     tree.insert(80)
-    tree.print_tree()
+    tree.insert(90)
+    print(tree.inorder())
+    print(tree.preorder())
+    print(tree.postorder())
+    print(tree.search(25))
