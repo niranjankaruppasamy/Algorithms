@@ -6,7 +6,7 @@ def binary_search_1(arr: List[Any], val:Any) -> int:
     # space - O(1)
     left = 0
     right = len(arr) - 1
-    while left < right:
+    while left <= right:
         mid = (left+right) // 2
         if arr[mid] == val:
             return mid
