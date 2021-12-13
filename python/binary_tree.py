@@ -68,6 +68,19 @@ class Tree:
             else:
                 return False
 
+    def find_min(self):
+        if self.left:
+            return self.left.find_min()
+        return self.data
+
+    def find_max(self):
+        if self.right:
+            return self.right.find_max()
+        return self.data
+
+    def delete(self, val):
+        pass
+
 if __name__ == "__main__":
     tree = Tree(50)
     tree.insert(25)
@@ -79,3 +92,5 @@ if __name__ == "__main__":
     print(tree.preorder())
     print(tree.postorder())
     print(tree.search(25))
+    print(tree.find_min())
+    print(tree.find_max())
