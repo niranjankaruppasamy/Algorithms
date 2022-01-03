@@ -9,22 +9,15 @@ mapper = {
 }
 
 def romanToint(val: str) -> int:
-	char_list = list(val.upper())
-	res = 0
-	index = 0
-	while index < len(char_list):
-		if index+1 >= len(char_list):
-			res += mapper.get(char_list[index])
-			index+=1
-			continue
-		if mapper.get(char_list[index]) >= mapper.get(char_list[index+1]):
-			res += mapper.get(char_list[index])
-		else:
-			res += mapper.get(char_list[index+1])
-			res -= mapper.get(char_list[index])
-			index += 1
-		index += 1
-	return res
+	res = [0] * len(val)
+	for i in range(len(val)):
+		res[i] = mapper[val[i]]
+
+	for j in range(len(res) - 1):
+		if res[j] < res[j+1]:
+			res[j] = res[j] * -1
+
+	return sum(res)
 
 
 if __name__ == "__main__":
